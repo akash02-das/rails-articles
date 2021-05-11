@@ -1,0 +1,40 @@
+<% if current_user.admin? %>
+  <h1>All Users</h1>
+
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th colspan="2">Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @users.each do |user| %>
+      <% if can? :manage, user %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.first_name %> <%= user.last_name %></td>
+          <td><%= user.email %> <br></td>
+
+          <td><%= link_to 'View', user_path(user.id), class: 'btn btn-sm btn-outline-info' %></td>
+          <td>
+            <%= link_to 'Delete', user_path(user.id), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-sm btn-outline-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+
+  <% else %>
+          <div class="card border-danger">
+            <div class="card-body text-center">
+              <h1 class="text-danger">403 Error</h1>
+              <h5>Sorry, You are not authorized to access this page</h5>
+              <%= link_to 'Go Home', root_path, class: 'btn btn-secondary mt-3' %>
+            </div>
+          </div>
+<% end %>

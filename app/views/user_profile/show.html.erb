@@ -1,0 +1,19 @@
+<% if user_signed_in? %>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">My Profile</h3>
+    </div>
+    <div class="card-body">
+      <% if @user.image.attached? %>
+      <%= image_tag @user.image, style: "width: 400px; display: block", class: 'img-thumbnail mb-5' %>
+        <% else %>
+        <img src="/profile.jpg" alt="profile pic" class="mb-5">
+      <% end %>
+
+      <h4 class="card-subtitle mb-2 text-muted"><strong>Name:</strong> <%= current_user.first_name %> <%= current_user.last_name %></h4>
+      <h4 class="card-subtitle mb-2 text-muted"><strong>Email:</strong> <%= current_user.email %></h4>
+      <p class="card-subtitle mb-2 text-muted"><strong>Bio:</strong> <%= current_user.bio %></p>
+      <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-primary mt-4' %>
+    </div>
+  </div>
+<% end %>

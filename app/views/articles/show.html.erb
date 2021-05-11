@@ -1,0 +1,46 @@
+<div class="jumbotron">
+
+  <% if @article.user != current_user %>
+    <% if @article.user.image.attached? %>
+    <%= image_tag @article.user.image, style: "width: 100px; display: block", class: 'img-thumbnail mb-2' %>
+    <% else %>
+      <img src="/profile.jpg" alt="profile pic" class="mb-2" style="width: 100px; display: block">
+      <% end %>
+  <h4 class="display-5 text-info">Author Name: <%= @article.user.first_name %> <%= @article.user.last_name %></h4>
+  <h4 class="display-5 text-info">Author Email: <%= @article.user.email %></h4>
+
+    <hr>
+    <% end %>
+
+
+
+    <h4>Categories: </h4>
+    <div class="container-fluid">
+      <ul class="list-unsettled nav">
+        <%= render @article.categories %>
+      </ul>
+    </div>
+
+  <hr>
+
+  <h3 class="display-5"><%= @article.title %></h3>
+  <p class="lead"><%= @article.body %></p>
+
+  <% (0...@article.images.count).each do |image| %>
+    <div style="width: 600px; height: 600px;">
+      <%= image_tag @article.images[image], style: 'width: 100%; height: auto' %>
+    </div>
+  <% end %>
+
+  <hr>
+
+  <%#= link_to 'Edit', edit_article_path(@article), class: 'btn btn-warning' %>
+  <% if can? :update, @article %>
+    <%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-warning' %>
+  <% end %>
+  <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
+</div>
+
+
+
+

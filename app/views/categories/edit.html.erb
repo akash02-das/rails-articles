@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h2>Editing Category</h2>
+      </div>
+
+      <div class="card-body">
+        <%= render 'form', category: @category %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Show', @category, class: 'btn btn-sm btn-info mt-3' %>
+<%= link_to 'Back', categories_path, class: 'btn btn-sm btn-secondary mt-3' %>

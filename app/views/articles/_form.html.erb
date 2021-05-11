@@ -1,0 +1,52 @@
+<%= form_with(model: article) do |form| %>
+  <% if article.errors.any? %>
+    <div id="error_explanation">
+<!--      <h2><%#= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>-->
+
+<!--      <ul>-->
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <% article.errors.each do |error| %>
+          <%= error.full_message %>.
+        <% end %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+<!--      </ul>-->
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control', placeholder: 'Enter Article Title' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :body %>
+    <%= form.text_area :body, class: 'form-control', placeholder: 'Enter Article Body' %>
+  </div>
+
+  <!-- Images upload -->
+  <div class="field form-group">
+    <%#= form.label :images %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
+
+  <!-- Category -->
+  <div class="field form-group">
+    <%= form.label :categories %>
+    <%= form.collection_select :category_ids, Category.order(:name), :id, :name, {}, {class: 'form-control select2', multiple: true} %>
+  </div>
+
+  <%= link_to 'Add custom category', new_category_path, class: 'btn btn-sm btn-secondary' %>
+  <p class="font-italic font-weight-lighter">(Add your custom categories in the categories list)</p>
+
+  <!--hidden user id-->
+  <div class="field form-group">
+    <%= form.number_field :user_id, id: :article_user_id, class: 'form-control', value: current_user.id, type: :hidden %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-success' %>
+  </div>
+<% end %>
