@@ -17,6 +17,11 @@
 
   <hr>
 
+ <%= render partial: "comments/comments", locals: {commentable: @user} %>
+ <%= render partial: "comments/form", locals: {commentable: @user} %>
+
+  <hr>
+
   <!-- Articles List -->
   <h3><%= @user.first_name %>'s Articles List</h3>
 

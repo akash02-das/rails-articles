@@ -8,8 +8,13 @@ Rails.application.routes.draw do
   match '/500', to: 'errors#internal_server_error', via: :all
 
   root to: 'home#index'
-  resources :articles
-  resources :users
+
+  resources :articles do
+    resources :comments, module: :articles
+  end
+  resources :users do
+    resources :comments, module: :users
+  end
   resources :categories
 
 end

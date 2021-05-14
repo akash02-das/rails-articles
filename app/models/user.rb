@@ -8,6 +8,7 @@ class User < ApplicationRecord
   attr_accessor :remove_image
 
   has_many :articles
+  has_many :comments, as: :commentable
   has_one_attached :image
 
   validates :first_name, :last_name, presence: true

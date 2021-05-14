@@ -34,6 +34,11 @@
 
   <hr>
 
+  <%= render partial: "comments/comments", locals: {commentable: @article} %>
+  <%= render partial: "comments/form", locals: {commentable: @article} %>
+
+  <hr>
+
   <%#= link_to 'Edit', edit_article_path(@article), class: 'btn btn-warning' %>
   <% if can? :update, @article %>
     <%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-warning' %>

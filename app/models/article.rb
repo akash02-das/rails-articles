@@ -3,6 +3,7 @@ class Article < ApplicationRecord
   has_many_attached :images
   has_many :articles_categories
   has_many :categories, through: :articles_categories
+  has_many :comments, as: :commentable
 
   validates :title, presence: true
   validates :body, presence: true

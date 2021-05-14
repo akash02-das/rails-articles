@@ -1,0 +1,11 @@
+<h4>Comments</h4>
+<% commentable.comments.each do |comment| %>
+  <div class="card mb-3">
+    <div class="card-header">
+      <p><%= link_to comment.user_name, user_path(comment.user_id) %></p>
+    </div>
+    <div class="card-body">
+      <p><%= comment.body %></p>
+    </div>
+  </div>
+<% end %>
